@@ -1,12 +1,12 @@
 package main
 
 import (
-  // "bytes"
+  "bytes"
   "fmt"
   "os"
   "reflect"
   "unicode"
-  // "os/exec"
+  "os/exec"
 )
 
 func isValid(s []string)(bool, string)  {
@@ -33,9 +33,23 @@ func main()  {
   }
 
   for i := 1; i < len(tasklist); i++  {
-    command := "task " + tasklist[i] + " modify depends:" + tasklist[i-1]
-    fmt.Println(command)
+    command := tasklist[i] + " modify depends:" + tasklist[i-1]
+    fmt.Println(" Type of 'command': ", reflect.TypeOf(command))
+    // fmt.Printf("depends:%v\n",tasklist[i-1])
+
+    cmd := exec.Command("task", tasklist[i], "modify", fmt.Sprintf("depends:%v", tasklist[i-1]))
+    // cmd := exec.Command("task", "22", "modify", "depends:21")
+    // cmd := exec.Command("echo", command)
+    fmt.Println(cmd.Path)
+    var out bytes.Buffer
+    cmd.Stdout = &out
+    err := cmd.Run()
+    if err != nil {
+      fmt.Println("Something went wrong: ", err.Error())
+    }
+    fmt.Println(" >> ", out.String())
   }
+  fmt.Println("done!")
 
   // cmd := exec.Command("ls")
 
