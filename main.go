@@ -9,7 +9,13 @@ import (
 
 func main()  {
   tasklist := os.Args[1:]
-  fmt.Println(tasklist)
+  fmt.Println(tasklist, tasklist[0], tasklist[len(tasklist) -1])
+  fmt.Println(len(tasklist))
+
+  for i := 1; i < len(tasklist); i++  {
+    command := "task " + tasklist[i] + " modify depends:" + tasklist[i-1]
+    fmt.Println(command)
+  }
 
   // cmd := exec.Command("ls")
 
