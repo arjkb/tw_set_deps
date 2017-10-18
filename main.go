@@ -35,9 +35,6 @@ func main()  {
   for i := 1; i < len(tasklist); i++  {
     command := "task " + tasklist[i] + " modify depends:" + tasklist[i-1]
     fmt.Println(command)
-    for _, ch := range tasklist[i]  {
-      fmt.Printf(" %c %v\n", ch, unicode.IsDigit(ch))
-    }
   }
 
   // cmd := exec.Command("ls")
