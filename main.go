@@ -1,15 +1,16 @@
+// Program to set up the dependencies of taskwarror tasks
+
 package main
 
 import (
   "bytes"
   "fmt"
   "os"
-  "reflect"
   "unicode"
   "os/exec"
 )
 
-func isValid(s []string)(bool, string)  {
+func isValid(s []string) (bool, string)  {
   for _, word := range s  {
     for _, ch := range word {
       if !unicode.IsDigit(ch)  {
@@ -22,42 +23,18 @@ func isValid(s []string)(bool, string)  {
 
 func main()  {
   tasklist := os.Args[1:]
-  fmt.Println(tasklist, tasklist[0], tasklist[len(tasklist) -1])
-  fmt.Println(len(tasklist))
-  fmt.Println(reflect.TypeOf(tasklist[0]))
-
   valid, word := isValid(tasklist)
-
   if !valid {
     panic(fmt.Sprintf(" Invalid input parameter: %q\n\tUse space separated numbers", word))
   }
 
   for i := 1; i < len(tasklist); i++  {
-    command := tasklist[i] + " modify depends:" + tasklist[i-1]
-    fmt.Println(" Type of 'command': ", reflect.TypeOf(command))
-    // fmt.Printf("depends:%v\n",tasklist[i-1])
-
     cmd := exec.Command("task", tasklist[i], "modify", fmt.Sprintf("depends:%v", tasklist[i-1]))
-    // cmd := exec.Command("task", "22", "modify", "depends:21")
-    // cmd := exec.Command("echo", command)
-    fmt.Println(cmd.Path)
     var out bytes.Buffer
     cmd.Stdout = &out
-    err := cmd.Run()
-    if err != nil {
-      fmt.Println("Something went wrong: ", err.Error())
+
+    if err := cmd.Run(); err != nil {
+      fmt.Println("Error: ", err.Error())
     }
-    fmt.Println(" >> ", out.String())
   }
-  fmt.Println("done!")
-
-  // cmd := exec.Command("ls")
-
-  // var out bytes.Buffer
-  // cmd.Stdout = &out
-  // err := cmd.Run()
-  // if err != nil {
-  //   fmt.Println("Something went wrong!")
-  // }
-  // fmt.Println(" >> ", out.String())
 }
