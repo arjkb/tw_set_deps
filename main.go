@@ -10,22 +10,23 @@ import (
   "os/exec"
 )
 
-func isValid(s []string) (bool, string)  {
-  for _, word := range s  {
+func isValid(s []string) error  {
+  for i, word := range s  {
     for _, ch := range word {
       if !unicode.IsDigit(ch)  {
-        return false, word
+        return fmt.Errorf("bad word %q (param %d)",  word, i+1)
       }
     }
   }
-  return true, ""
+  return nil
 }
 
 func main()  {
   tasklist := os.Args[1:]
-  valid, word := isValid(tasklist)
-  if !valid {
-    panic(fmt.Sprintf(" Invalid input parameter: %q\n\tUse space separated numbers", word))
+  err := isValid(tasklist)
+  if err != nil {
+    fmt.Fprintf(os.Stderr, "invalid input: %v\n", err)
+    os.Exit(1)
   }
 
   for i := 1; i < len(tasklist); i++  {
