@@ -29,7 +29,6 @@ func main() {
 	err := isValid(tasklist)
 	if err != nil {
 		log.Fatalf("invalid input: %v\n", err)
-		os.Exit(1)
 	}
 
 	for i := 1; i < len(tasklist); i++ {
