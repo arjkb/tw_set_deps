@@ -36,9 +36,6 @@ func main() {
 		cmd := exec.Command("tlask", tasklist[i], "modify", fmt.Sprintf("depends:%v", tasklist[i-1]))
 		var out bytes.Buffer
 		cmd.Stdout = &out
-
-		fmt.Println(cmd.Args)
-
 		if err := cmd.Run(); err != nil {
 			log.Fatalf("%s fails: %v", cmd.Args, err)
 		}
