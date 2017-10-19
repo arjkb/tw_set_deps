@@ -5,10 +5,10 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
 	"unicode"
-  "log"
 )
 
 func isValid(s []string) error {
@@ -23,8 +23,8 @@ func isValid(s []string) error {
 }
 
 func main() {
-  log.SetPrefix("tw_set_deps: ")
-  log.SetFlags(0)
+	log.SetPrefix("tw_set_deps: ")
+	log.SetFlags(0)
 	tasklist := os.Args[1:]
 	err := isValid(tasklist)
 	if err != nil {
@@ -37,7 +37,7 @@ func main() {
 		var out bytes.Buffer
 		cmd.Stdout = &out
 
-    fmt.Println(cmd.Args)
+		fmt.Println(cmd.Args)
 
 		if err := cmd.Run(); err != nil {
 			log.Fatalf("%s fails: %v", cmd.Args, err)
