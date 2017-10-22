@@ -4,6 +4,8 @@ Simple [Go](https://golang.org/) program to manage dependencies in [taskwarrior.
 
 Let's say you have the following tasks:
 
+|ID|Task Name|
+|---|---|
 | 1 | Do homework |
 | 2 | Write report |
 | 3 | Submit report |
