@@ -11,8 +11,8 @@ import (
 	"unicode"
 )
 
-func isValid(s []string) error {
-	for i, word := range s {
+func isValid(words ...string) error {
+	for i, word := range words {
 		for _, ch := range word {
 			if !unicode.IsDigit(ch) {
 				return fmt.Errorf("bad word %q (param %d)", word, i+1)
@@ -26,7 +26,7 @@ func main() {
 	log.SetPrefix("tw_set_deps: ")
 	log.SetFlags(0)
 	tasklist := os.Args[1:]
-	err := isValid(tasklist)
+	err := isValid(tasklist...)
 	if err != nil {
 		log.Fatalf("invalid input: %v\n", err)
 	}
