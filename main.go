@@ -25,8 +25,7 @@ func main() {
 	log.SetPrefix("tw_set_deps: ")
 	log.SetFlags(0)
 	tasklist := os.Args[1:]
-	err := isValid(tasklist...)
-	if err != nil {
+	if err := isValid(tasklist...); err != nil {
 		log.Fatalf("invalid input: %v\n", err)
 	}
 
