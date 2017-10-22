@@ -13,8 +13,8 @@ Let's say you have the following tasks:
 To enforce the condition that task 3 depends on task 2, which inturn depends on task 1, you can write:
 
 ```
-task 3 modify depends task 2
-task 2 modify depends task 1
+task 3 modify depends:2
+task 2 modify depends:1
 ```
 
 This can get annoying when there's too many tasks!
