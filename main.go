@@ -3,7 +3,6 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"log"
 	"os"
@@ -33,8 +32,6 @@ func main() {
 
 	for i := 1; i < len(tasklist); i++ {
 		cmd := exec.Command("task", tasklist[i], "modify", fmt.Sprintf("depends:%v", tasklist[i-1]))
-		var out bytes.Buffer
-		cmd.Stdout = &out
 		if err := cmd.Run(); err != nil {
 			log.Fatalf("%s fails: %v", cmd.Args, err)
 		}
