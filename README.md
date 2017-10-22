@@ -4,9 +4,9 @@ Simple [Go](https://golang.org/) program to manage dependencies in [taskwarrior.
 
 Let's say you have the following tasks:
 
-|1|Do homework|
-|2|Write report|
-|3|Submit report|
+| 1 | Do homework |
+| 2 | Write report |
+| 3 | Submit report |
 
 To enforce the condition that task 3 depends on task 2, which inturn depends on task 1, you can write:
 
